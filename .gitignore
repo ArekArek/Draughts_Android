@@ -76,3 +76,6 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+app/libs/core-1.0.jar
+gradle/
