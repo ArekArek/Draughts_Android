@@ -5,21 +5,21 @@
     android:layout_height="match_parent"
     android:background="@color/neutral"
     android:configChanges="orientation"
-    android:screenOrientation="portrait"
     android:orientation="vertical"
+    android:screenOrientation="portrait"
     tools:context=".game.GameActivity">
 
     <com.tuco.draughtsui.game.board.BoardView
         android:id="@+id/boardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10px"
+        android:layout_margin="10dp"
         android:background="@drawable/board"
-        android:padding="10dp"/>
+        android:padding="10dp" />
 
     <Button
-        android:id="@+id/start"
-        android:layout_width="151dp"
+        android:id="@+id/startGameButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="start" />
