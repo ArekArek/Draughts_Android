@@ -9,10 +9,18 @@ import android.widget.TableRow;
 
 import com.tuco.draughts.board.Board;
 import com.tuco.draughts.board.Chequer;
+import com.tuco.draughts.board.util.Coordinate;
+import com.tuco.draughtsui.game.movement.HumanPositionLoader;
+
+import lombok.Getter;
 
 public class BoardView extends TableLayout {
 
     private Context context;
+
+    @Getter
+    private final HumanPositionLoader humanPositionLoader = HumanPositionLoader.getInstance();
+
     private static final TableLayout.LayoutParams rowLayout;
 
     static {
@@ -45,9 +53,11 @@ public class BoardView extends TableLayout {
 
     private void fillTable(Board board) {
         Chequer[][] base = board.getBase();
+        int columnCount = 0;
         for (Chequer[] row : base) {
-            TableRow tableRow = generateTableRow(row);
+            TableRow tableRow = generateTableRow(row, columnCount);
             addView(tableRow);
+            columnCount++;
         }
     }
 
@@ -57,17 +67,23 @@ public class BoardView extends TableLayout {
         fillTable(board);
 
         invalidate();
-        postInvalidate();
     }
 
 
     @NonNull
-    private TableRow generateTableRow(Chequer[] row) {
+    private TableRow generateTableRow(Chequer[] row, int columnCount) {
         TableRow tableRow = new TableRow(context);
 
+        int rowCount = 0;
         for (Chequer chequer : row) {
-            PlaceView placeView = new PlaceView(context, chequer);
+            PlaceView placeView = new PlaceView.Builder(context)
+                    .setChequer(chequer)
+                    .setCoordinate(new Coordinate(columnCount, rowCount))
+                    .setOnClickListener(humanPositionLoader)
+                    .build();
+
             tableRow.addView(placeView);
+            rowCount++;
         }
 
         tableRow.setLayoutParams(rowLayout);
