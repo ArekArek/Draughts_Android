@@ -12,6 +12,7 @@ import com.tuco.draughts.game.util.ChangeTurnListener;
 import com.tuco.draughts.movement.maker.AIMovementMaker;
 import com.tuco.draughts.movement.maker.AlgorithmType;
 import com.tuco.draughts.movement.maker.Heuristic;
+import com.tuco.draughts.movement.maker.HumanMovementMaker;
 import com.tuco.draughts.movement.maker.MovementMaker;
 import com.tuco.draughtsui.R;
 import com.tuco.draughtsui.game.board.BoardView;
@@ -27,6 +28,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        boardView = findViewById(R.id.boardView);
 
         initializeGame();
 
@@ -44,19 +47,18 @@ public class GameActivity extends AppCompatActivity {
 
         DraughtsState state = new DraughtsState(new StandardBoardCreator());
 
-        MovementMaker aiMove1 = new AIMovementMaker(state, AlgorithmType.ALPHABETA, Heuristic.SIMPLE);
+        MovementMaker aiMove1 = new HumanMovementMaker(state, boardView.getHumanPositionLoader());
         MovementMaker aiMove2 = new AIMovementMaker(state, AlgorithmType.SCOUT, Heuristic.SIMPLE);
 
         gameManager = DraughtGameManager.builder()
                 .state(state)
-                .playerWhite(aiMove2)
-                .playerBlack(aiMove1)
+                .playerWhite(aiMove1)
+                .playerBlack(aiMove2)
                 .generalChangeTurnListener(generalChangeTurnListener)
                 .build();
     }
 
     private void initializeViews() {
-        boardView = findViewById(R.id.boardView);
         boardView.init(gameManager.getState().getBoard());
 
         startButton = findViewById(R.id.startGameButton);
