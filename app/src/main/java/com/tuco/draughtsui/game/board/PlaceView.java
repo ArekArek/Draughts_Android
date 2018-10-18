@@ -2,6 +2,7 @@ package com.tuco.draughtsui.game.board;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.widget.TableRow;
@@ -10,11 +11,13 @@ import com.tuco.draughts.board.Chequer;
 import com.tuco.draughts.board.util.Coordinate;
 
 import lombok.Getter;
+import lombok.Setter;
 
 public class PlaceView extends android.support.v7.widget.AppCompatImageView {
 
     private static final int CLICK_DURATION = 600;
 
+    @Getter
     private Chequer chequer;
 
     @Getter
@@ -23,27 +26,22 @@ public class PlaceView extends android.support.v7.widget.AppCompatImageView {
     private TransitionDrawable transitionDrawable;
     private Drawable chequerDrawable;
 
-    private static final TableRow.LayoutParams cellLayout;
+    @Setter
+    private boolean hidden;
+
+    public static final TableRow.LayoutParams CELL_LAYOUT;
 
     static {
-        cellLayout = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT);
-        cellLayout.weight = 1;
-        cellLayout.setMargins(5, 5, 5, 5);
+        CELL_LAYOUT = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT);
+        CELL_LAYOUT.weight = 1;
     }
 
-    private PlaceView(Context context, Chequer chequer, Coordinate coordinate, OnClickListener onClickListener) {
+    private PlaceView(Context context, Chequer chequer, Coordinate coordinate) {
         super(context);
         this.chequer = chequer;
         this.coordinate = coordinate;
 
-        if (chequer == Chequer.DISABLED) {
-            setClickable(false);
-        } else {
-            setClickable(true);
-            setOnClickListener(onClickListener);
-        }
-
-        setLayoutParams(cellLayout);
+        setLayoutParams(CELL_LAYOUT);
         initDrawables();
     }
 
@@ -72,12 +70,14 @@ public class PlaceView extends android.support.v7.widget.AppCompatImageView {
             chequerDrawable.setBounds(canvas.getClipBounds());
             chequerDrawable.draw(canvas);
         }
+        if (hidden) {
+            canvas.drawColor(Color.argb(95, 0, 0, 0));
+        }
     }
 
     public static class Builder {
         private Chequer chequer;
         private Coordinate coordinate;
-        private OnClickListener onClickListener;
         private Context context;
 
         Builder(Context context) {
@@ -94,13 +94,8 @@ public class PlaceView extends android.support.v7.widget.AppCompatImageView {
             return this;
         }
 
-        public Builder setOnClickListener(OnClickListener onClickListener) {
-            this.onClickListener = onClickListener;
-            return this;
-        }
-
         public PlaceView build() {
-            return new PlaceView(context, chequer, coordinate, onClickListener);
+            return new PlaceView(context, chequer, coordinate);
         }
     }
 }

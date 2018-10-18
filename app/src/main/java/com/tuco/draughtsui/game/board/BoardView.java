@@ -1,6 +1,7 @@
 package com.tuco.draughtsui.game.board;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
@@ -11,6 +12,8 @@ import com.tuco.draughts.board.Board;
 import com.tuco.draughts.board.Chequer;
 import com.tuco.draughts.board.util.Coordinate;
 import com.tuco.draughtsui.game.movement.HumanPositionLoader;
+
+import java.util.List;
 
 import lombok.Getter;
 
@@ -69,6 +72,33 @@ public class BoardView extends TableLayout {
         invalidate();
     }
 
+    public void highlightPossible(List<Coordinate> possiblePositions) {
+        ((Activity) context).runOnUiThread(() -> {
+            for (int i = 0; i < getChildCount(); i++) {
+                if (getChildAt(i) instanceof TableRow) {
+                    TableRow tableRow = (TableRow) getChildAt(i);
+                    for (int j = 0; j < tableRow.getChildCount(); j++) {
+                        if (tableRow.getChildAt(j) instanceof PlaceView) {
+                            PlaceView placeView = (PlaceView) tableRow.getChildAt(j);
+                            highlitingPlace(placeView, possiblePositions);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void highlitingPlace(PlaceView placeView, List<Coordinate> possiblePositions) {
+        if (!possiblePositions.contains(placeView.getCoordinate())) {
+            placeView.setHidden(true);
+            placeView.setClickable(false);
+        } else {
+            placeView.setHidden(false);
+            placeView.setClickable(true);
+            placeView.setOnClickListener(humanPositionLoader);
+        }
+        placeView.invalidate();
+    }
 
     @NonNull
     private TableRow generateTableRow(Chequer[] row, int columnCount) {
@@ -76,10 +106,11 @@ public class BoardView extends TableLayout {
 
         int rowCount = 0;
         for (Chequer chequer : row) {
+            Coordinate placeCoordinates = new Coordinate(columnCount, rowCount);
+
             PlaceView placeView = new PlaceView.Builder(context)
                     .setChequer(chequer)
-                    .setCoordinate(new Coordinate(columnCount, rowCount))
-                    .setOnClickListener(humanPositionLoader)
+                    .setCoordinate(placeCoordinates)
                     .build();
 
             tableRow.addView(placeView);

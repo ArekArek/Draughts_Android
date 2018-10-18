@@ -12,10 +12,12 @@ import com.tuco.draughts.game.util.ChangeTurnListener;
 import com.tuco.draughts.movement.maker.AIMovementMaker;
 import com.tuco.draughts.movement.maker.AlgorithmType;
 import com.tuco.draughts.movement.maker.Heuristic;
+import com.tuco.draughts.movement.maker.HumanMovementInformator;
 import com.tuco.draughts.movement.maker.HumanMovementMaker;
 import com.tuco.draughts.movement.maker.MovementMaker;
 import com.tuco.draughtsui.R;
 import com.tuco.draughtsui.game.board.BoardView;
+import com.tuco.draughtsui.game.movement.AndroidMovementInformator;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -47,7 +49,8 @@ public class GameActivity extends AppCompatActivity {
 
         DraughtsState state = new DraughtsState(new StandardBoardCreator());
 
-        MovementMaker aiMove1 = new HumanMovementMaker(state, boardView.getHumanPositionLoader());
+        HumanMovementInformator humanMovementInformator = new AndroidMovementInformator(boardView);
+        MovementMaker aiMove1 = new HumanMovementMaker(state, boardView.getHumanPositionLoader(), humanMovementInformator);
         MovementMaker aiMove2 = new AIMovementMaker(state, AlgorithmType.SCOUT, Heuristic.SIMPLE);
 
         gameManager = DraughtGameManager.builder()
