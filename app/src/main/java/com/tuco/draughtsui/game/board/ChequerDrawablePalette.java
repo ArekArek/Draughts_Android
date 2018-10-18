@@ -9,6 +9,7 @@ import com.tuco.draughts.board.Chequer;
 import com.tuco.draughtsui.R;
 
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder(builderClassName = "Builder")
 public class ChequerDrawablePalette {
@@ -19,7 +20,9 @@ public class ChequerDrawablePalette {
     private Drawable blackKing;
     private Drawable white;
     private Drawable whiteKing;
-    private Drawable empty;
+
+    @Getter
+    private Drawable clickView;
 
     private Drawable disabledBackground;
     private Drawable enabledBackground;
@@ -33,7 +36,8 @@ public class ChequerDrawablePalette {
         builder.blackKing = ResourcesCompat.getDrawable(resources, R.drawable.simple_black_king, null);
         builder.white = ResourcesCompat.getDrawable(resources, R.drawable.simple_white, null);
         builder.whiteKing = ResourcesCompat.getDrawable(resources, R.drawable.simple_white_king, null);
-        builder.empty = ResourcesCompat.getDrawable(resources, R.drawable.simple_empty, null);
+
+        builder.clickView = ResourcesCompat.getDrawable(resources, R.drawable.simple_click_view, null);
 
         builder.disabledBackground = new ColorDrawable(ResourcesCompat.getColor(resources, R.color.disabledBackground, null));
         builder.enabledBackground = new ColorDrawable(ResourcesCompat.getColor(resources, R.color.enabledBackground, null));
@@ -52,7 +56,7 @@ public class ChequerDrawablePalette {
             case WHITE_KING:
                 return whiteKing;
             default:
-                return empty;
+                return null;
         }
     }
 

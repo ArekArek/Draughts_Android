@@ -1,8 +1,9 @@
 package com.tuco.draughtsui.game.board;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.widget.TableRow;
 
 import com.tuco.draughts.board.Chequer;
@@ -12,10 +13,15 @@ import lombok.Getter;
 
 public class PlaceView extends android.support.v7.widget.AppCompatImageView {
 
+    private static final int CLICK_DURATION = 600;
+
     private Chequer chequer;
 
     @Getter
     private Coordinate coordinate;
+
+    private TransitionDrawable transitionDrawable;
+    private Drawable chequerDrawable;
 
     private static final TableRow.LayoutParams cellLayout;
 
@@ -30,7 +36,13 @@ public class PlaceView extends android.support.v7.widget.AppCompatImageView {
         this.chequer = chequer;
         this.coordinate = coordinate;
 
-        setOnClickListener(onClickListener);
+        if (chequer == Chequer.DISABLED) {
+            setClickable(false);
+        } else {
+            setClickable(true);
+            setOnClickListener(onClickListener);
+        }
+
         setLayoutParams(cellLayout);
         initDrawables();
     }
@@ -38,14 +50,29 @@ public class PlaceView extends android.support.v7.widget.AppCompatImageView {
     private void initDrawables() {
         ChequerDrawablePalette chequerDrawablePalette = ChequerDrawablePalette.getDefault(getResources());
 
-        Drawable[] layers = new Drawable[2];
-        layers[0] = chequerDrawablePalette.getBackground(chequer);
-        layers[1] = chequerDrawablePalette.getImage(chequer);
-        LayerDrawable layerDrawable = new LayerDrawable(layers);
+        chequerDrawable = chequerDrawablePalette.getImage(chequer);
 
-        setImageDrawable(layerDrawable);
+        Drawable images[] = new Drawable[2];
+        images[0] = chequerDrawablePalette.getBackground(chequer);
+        images[1] = chequerDrawablePalette.getClickView();
+        transitionDrawable = new TransitionDrawable(images);
+
+        setImageDrawable(transitionDrawable);
     }
 
+    public void showClick() {
+        transitionDrawable.startTransition(CLICK_DURATION / 2);
+        transitionDrawable.reverseTransition(CLICK_DURATION / 2);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        if (chequerDrawable != null) {
+            chequerDrawable.setBounds(canvas.getClipBounds());
+            chequerDrawable.draw(canvas);
+        }
+    }
 
     public static class Builder {
         private Chequer chequer;

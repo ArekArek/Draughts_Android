@@ -39,6 +39,8 @@ public class HumanPositionLoader implements PositionLoader, View.OnClickListener
     public void onClick(View view) {
         if (view instanceof PlaceView) {
             PlaceView placeView = (PlaceView) view;
+            placeView.showClick();
+
             synchronized (this) {
                 coordinate = placeView.getCoordinate();
                 notify();
