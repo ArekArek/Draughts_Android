@@ -11,6 +11,7 @@ import android.widget.TableRow;
 import com.tuco.draughts.board.Board;
 import com.tuco.draughts.board.Chequer;
 import com.tuco.draughts.board.util.Coordinate;
+import com.tuco.draughts.movement.util.Movement;
 import com.tuco.draughtsui.game.movement.HumanPositionLoader;
 
 import java.util.List;
@@ -119,5 +120,14 @@ public class BoardView extends TableLayout {
 
         tableRow.setLayoutParams(rowLayout);
         return tableRow;
+    }
+
+    public PlaceView getPlaceView(Coordinate coordinate) {
+        TableRow row = (TableRow) getChildAt(coordinate.getColumn());
+        return (PlaceView) row.getChildAt(coordinate.getRow());
+    }
+
+    public void showMove(Movement movement) {
+        new MoveAnimator(this, movement).start();
     }
 }
