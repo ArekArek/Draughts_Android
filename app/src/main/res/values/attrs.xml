@@ -15,4 +15,13 @@
             <enum name="black" value="1"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="NumberPicker">
+        <attr name="text" format="string"/>
+        <attr name="defaultValue" format="float" />
+        <attr name="minValue" format="float"/>
+        <attr name="maxValue" format="float"/>
+        <attr name="step" format="float"/>
+        <attr name="floatingPoint" format="boolean"/>
+    </declare-styleable>
 </resources>
