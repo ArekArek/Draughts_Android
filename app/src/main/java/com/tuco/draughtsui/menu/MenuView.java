@@ -19,8 +19,8 @@ public class MenuView extends LinearLayout {
         super(context, attrs);
 
         setLayoutFromResources(context);
-        initUsingAttributes(context, attrs);
         initViews();
+        initUsingAttributes(context, attrs);
     }
 
     private void setLayoutFromResources(Context context) {
