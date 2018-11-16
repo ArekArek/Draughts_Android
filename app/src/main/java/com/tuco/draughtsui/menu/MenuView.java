@@ -37,9 +37,9 @@ public class MenuView extends LinearLayout {
 
         try {
             if (a.getInteger(R.styleable.MenuView_type, 0) == 0) {
-                setBackgroundColor(getResources().getColor(R.color.white));
+                setBackgroundColor(context.getColor(R.color.white));
             } else {
-                setBackgroundColor(getResources().getColor(R.color.black));
+                setBackgroundColor(context.getColor(R.color.black));
             }
         } finally {
             a.recycle();

@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
-import com.tuco.draughts.board.Chequer;
 import com.tuco.draughts.board.util.StandardBoardCreator;
 import com.tuco.draughts.game.DraughtGameManager;
 import com.tuco.draughts.game.DraughtsState;

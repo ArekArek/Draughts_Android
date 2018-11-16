@@ -1,4 +1,4 @@
-package com.tuco.draughtsui.menu;
+package com.tuco.draughtsui.menu.configuration.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -62,13 +62,9 @@ public class NumberPicker extends LinearLayout {
         value = a.getFloat(R.styleable.NumberPicker_defaultValue, 2);
         refreshNumberPresenter();
 
-        increment.setOnClickListener(v -> {
-            incrementValue();
-        });
+        increment.setOnClickListener(v -> incrementValue());
+        decrement.setOnClickListener(v -> decrementValue());
 
-        decrement.setOnClickListener(v -> {
-            decrementValue();
-        });
         a.recycle();
     }
 
@@ -87,6 +83,6 @@ public class NumberPicker extends LinearLayout {
     }
 
     private void refreshNumberPresenter() {
-        numberPresenter.setText(floatingPoint ? String.valueOf(value) : String.valueOf((int)value));
+        numberPresenter.setText(floatingPoint ? String.valueOf(value) : String.valueOf((int) value));
     }
 }
