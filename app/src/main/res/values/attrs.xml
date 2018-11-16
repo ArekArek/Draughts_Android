@@ -9,4 +9,10 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="MenuView">
+        <attr name="type" format="enum">
+            <enum name="white" value="0"/>
+            <enum name="black" value="1"/>
+        </attr>
+    </declare-styleable>
 </resources>
