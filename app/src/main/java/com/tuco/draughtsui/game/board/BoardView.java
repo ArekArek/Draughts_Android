@@ -1,9 +1,9 @@
 package com.tuco.draughtsui.game.board;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -74,7 +74,7 @@ public class BoardView extends TableLayout {
     }
 
     public void highlightPossible(List<Coordinate> possiblePositions) {
-        ((Activity) context).runOnUiThread(() -> {
+        ((AppCompatActivity) context).runOnUiThread(() -> {
             for (int i = 0; i < getChildCount(); i++) {
                 if (getChildAt(i) instanceof TableRow) {
                     TableRow tableRow = (TableRow) getChildAt(i);

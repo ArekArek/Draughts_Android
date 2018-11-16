@@ -4,9 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.graphics.Path;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
@@ -41,7 +41,7 @@ public class MoveAnimator {
         Coordinate startCoordinate = steps.get(0);
         PlaceView startPlace = boardView.getPlaceView(startCoordinate);
 
-        floatingChequer = ((Activity) boardView.getContext()).findViewById(R.id.floatingChecker);
+        floatingChequer = ((AppCompatActivity) boardView.getContext()).findViewById(R.id.floatingChecker);
         floatingChequer.setValues(startPlace);
         floatingChequer.setOnlyForeground();
         floatingChequer.setHidden(false);
