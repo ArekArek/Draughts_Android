@@ -5,15 +5,19 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
-import android.widget.ToggleButton;
 
 import com.tuco.draughtsui.R;
+import com.tuco.draughtsui.menu.configuration.enums.DifficultyType;
+import com.tuco.draughtsui.menu.configuration.enums.PlayerType;
+import com.tuco.draughtsui.menu.configuration.views.EnumPicker;
 
 
 public class MenuView extends LinearLayout {
 
-    private ToggleButton playerTypePicker;
+    private EnumPicker playerTypePicker;
+    private EnumPicker difficultyPicker;
     private LinearLayout aiMenu;
+    private LinearLayout aiConfiguration;
 
     public MenuView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -48,11 +52,27 @@ public class MenuView extends LinearLayout {
     }
 
     private void initViews() {
+        initPlayerTypePicker();
+        initDifficultPicker();
+    }
+
+    private void initPlayerTypePicker() {
         aiMenu = findViewById(R.id.aiMenu);
 
         playerTypePicker = findViewById(R.id.playerTypePicker);
-        playerTypePicker.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            aiMenu.setVisibility(isChecked ? VISIBLE : INVISIBLE);
+        playerTypePicker.init(getContext(), PlayerType.HUMAN);
+        playerTypePicker.setOnClickListener((l) -> {
+            aiMenu.setVisibility(playerTypePicker.getValue() == PlayerType.AI ? VISIBLE : INVISIBLE);
+        });
+    }
+
+    private void initDifficultPicker() {
+        aiConfiguration = findViewById(R.id.aiConfiguration);
+
+        difficultyPicker = findViewById(R.id.difficultyPicker);
+        difficultyPicker.init(getContext(), DifficultyType.MEDIUM);
+        difficultyPicker.setOnClickListener((l) -> {
+            aiConfiguration.setVisibility(difficultyPicker.getValue() == DifficultyType.CUSTOM ? VISIBLE : INVISIBLE);
         });
     }
 }

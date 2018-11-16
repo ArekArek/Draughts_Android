@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <ToggleButton
+    <com.tuco.draughtsui.menu.configuration.views.EnumPicker
         android:id="@+id/playerTypePicker"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:showText="true"
-        android:textColor="@color/colorPrimaryDark"
-        android:textOff="HUMAN"
-        android:textOn="AI"
-        android:theme="@style/AppTheme.ToggleButton"/>
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:id="@+id/aiMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:visibility="invisible">
+
+        <com.tuco.draughtsui.menu.configuration.views.EnumPicker
+            android:id="@+id/difficultyPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/aiConfiguration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <com.tuco.draughtsui.menu.configuration.views.NumberPicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:defaultValue="3.5"
+                app:floatingPoint="true"
+                app:maxValue="7"
+                app:minValue="0.5"
+                app:step="0.5"
+                app:text="depth" />
+        </LinearLayout>
+
 
     </LinearLayout>
 
