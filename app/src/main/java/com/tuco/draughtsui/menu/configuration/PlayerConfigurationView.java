@@ -1,4 +1,4 @@
-package com.tuco.draughtsui.menu;
+package com.tuco.draughtsui.menu.configuration;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -16,7 +16,7 @@ import com.tuco.draughtsui.menu.configuration.views.EnumPicker;
 import com.tuco.draughtsui.menu.configuration.views.NumberPicker;
 
 
-public class MenuView extends LinearLayout {
+public class PlayerConfigurationView extends LinearLayout {
 
     private EnumPicker playerTypePicker;
     private EnumPicker difficultyPicker;
@@ -28,7 +28,7 @@ public class MenuView extends LinearLayout {
     private EnumPicker heuristicPicker;
     private NumberPicker timeLimitPicker;
 
-    public MenuView(Context context, AttributeSet attrs) {
+    public PlayerConfigurationView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         setLayoutFromResources(context);
@@ -39,17 +39,17 @@ public class MenuView extends LinearLayout {
     private void setLayoutFromResources(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.menu_view, this, true);
+        inflater.inflate(R.layout.player_configuration_view, this, true);
     }
 
     private void initUsingAttributes(Context context, AttributeSet attrs) {
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.MenuView,
+                R.styleable.PlayerConfigurationView,
                 0, 0);
 
         try {
-            if (a.getInteger(R.styleable.MenuView_type, 0) == 0) {
+            if (a.getInteger(R.styleable.PlayerConfigurationView_type, 0) == 0) {
                 setBackgroundColor(context.getColor(R.color.white));
             } else {
                 setBackgroundColor(context.getColor(R.color.black));

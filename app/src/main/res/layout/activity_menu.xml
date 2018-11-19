@@ -14,8 +14,8 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <com.tuco.draughtsui.menu.MenuView
-        android:id="@+id/menuWhite"
+    <com.tuco.draughtsui.menu.configuration.PlayerConfigurationView
+        android:id="@+id/playerWhiteConfiguration"
         app:type="white"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -28,8 +28,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.tuco.draughtsui.menu.MenuView
-        android:id="@+id/menuBlack"
+    <com.tuco.draughtsui.menu.configuration.PlayerConfigurationView
+        android:id="@+id/playerBlackConfiguration"
         app:type="black"
         android:layout_width="0dp"
         android:layout_height="0dp"
