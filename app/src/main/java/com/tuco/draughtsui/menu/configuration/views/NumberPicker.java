@@ -17,7 +17,6 @@ public class NumberPicker extends LinearLayout {
 
     private Button decrement;
     private Button increment;
-    private TextView text;
     private TextView numberPresenter;
     private float step;
     @Getter
@@ -41,7 +40,6 @@ public class NumberPicker extends LinearLayout {
     }
 
     private void initViews() {
-        text = findViewById(R.id.text);
         decrement = findViewById(R.id.decrement);
         increment = findViewById(R.id.increment);
         numberPresenter = findViewById(R.id.numberPresenter);
@@ -57,7 +55,6 @@ public class NumberPicker extends LinearLayout {
         minValue = a.getFloat(R.styleable.NumberPicker_minValue, 1);
         maxValue = a.getFloat(R.styleable.NumberPicker_maxValue, 10);
         floatingPoint = a.getBoolean(R.styleable.NumberPicker_floatingPoint, false);
-        text.setText(a.getString(R.styleable.NumberPicker_text));
 
         value = a.getFloat(R.styleable.NumberPicker_defaultValue, 2);
         refreshNumberPresenter();
