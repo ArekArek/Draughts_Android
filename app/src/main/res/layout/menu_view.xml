@@ -24,24 +24,88 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <LinearLayout
+        <TableLayout
             android:id="@+id/aiConfiguration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
+            android:layout_margin="6dp"
             android:visibility="invisible">
 
-            <com.tuco.draughtsui.menu.configuration.views.NumberPicker
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:defaultValue="3.5"
-                app:floatingPoint="true"
-                app:maxValue="7"
-                app:minValue="0.5"
-                app:step="0.5"
-                app:text="depth" />
-        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" />
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:text="depth" />
+
+                <com.tuco.draughtsui.menu.configuration.views.NumberPicker
+                    android:id="@+id/depthPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:defaultValue="3.5"
+                    app:floatingPoint="true"
+                    app:maxValue="7"
+                    app:minValue="0.5"
+                    app:step="0.5" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:text="algorithm" />
+
+                <com.tuco.draughtsui.menu.configuration.views.EnumPicker
+                    android:id="@+id/algorithmPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:text="heuristic" />
+
+                <com.tuco.draughtsui.menu.configuration.views.EnumPicker
+                    android:id="@+id/heuristicPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:text="time limit" />
+
+                <com.tuco.draughtsui.menu.configuration.views.NumberPicker
+                    android:id="@+id/timeLimitPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:defaultValue="3"
+                    app:floatingPoint="true"
+                    app:maxValue="20"
+                    app:minValue="1"
+                    app:step="0.5" />
+            </TableRow>
+        </TableLayout>
 
 
     </LinearLayout>

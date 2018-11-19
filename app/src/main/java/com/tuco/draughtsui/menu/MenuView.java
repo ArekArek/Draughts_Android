@@ -5,11 +5,15 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 
+import com.tuco.draughts.movement.maker.AlgorithmType;
+import com.tuco.draughts.movement.maker.Heuristic;
 import com.tuco.draughtsui.R;
 import com.tuco.draughtsui.menu.configuration.enums.DifficultyType;
 import com.tuco.draughtsui.menu.configuration.enums.PlayerType;
 import com.tuco.draughtsui.menu.configuration.views.EnumPicker;
+import com.tuco.draughtsui.menu.configuration.views.NumberPicker;
 
 
 public class MenuView extends LinearLayout {
@@ -17,7 +21,12 @@ public class MenuView extends LinearLayout {
     private EnumPicker playerTypePicker;
     private EnumPicker difficultyPicker;
     private LinearLayout aiMenu;
-    private LinearLayout aiConfiguration;
+    private TableLayout aiConfiguration;
+
+    private NumberPicker depthPicker;
+    private EnumPicker algorithmPicker;
+    private EnumPicker heuristicPicker;
+    private NumberPicker timeLimitPicker;
 
     public MenuView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -54,6 +63,8 @@ public class MenuView extends LinearLayout {
     private void initViews() {
         initPlayerTypePicker();
         initDifficultPicker();
+
+        initAiConfigurationViews();
     }
 
     private void initPlayerTypePicker() {
@@ -74,5 +85,17 @@ public class MenuView extends LinearLayout {
         difficultyPicker.setOnClickListener((l) -> {
             aiConfiguration.setVisibility(difficultyPicker.getValue() == DifficultyType.CUSTOM ? VISIBLE : INVISIBLE);
         });
+    }
+
+    private void initAiConfigurationViews() {
+        depthPicker = findViewById(R.id.depthPicker);
+
+        algorithmPicker = findViewById(R.id.algorithmPicker);
+        algorithmPicker.init(getContext(), AlgorithmType.MINMAX);
+
+        heuristicPicker = findViewById(R.id.heuristicPicker);
+        heuristicPicker.init(getContext(), Heuristic.SIMPLE);
+
+        timeLimitPicker = findViewById(R.id.timeLimitPicker);
     }
 }
