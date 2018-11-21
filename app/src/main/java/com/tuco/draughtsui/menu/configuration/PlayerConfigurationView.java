@@ -98,4 +98,21 @@ public class PlayerConfigurationView extends LinearLayout {
 
         timeLimitPicker = findViewById(R.id.timeLimitPicker);
     }
+
+    public PlayerConfigurationDTO getData() {
+        if (playerTypePicker.getValue() == PlayerType.HUMAN) {
+            return PlayerConfigurationDTO.builder()
+                    .human(true)
+                    .build();
+        } else {
+            return PlayerConfigurationDTO.builder()
+                    .human(false)
+                    .difficultyType((DifficultyType) difficultyPicker.getValue())
+                    .depth(depthPicker.getValue())
+                    .algorithm((AlgorithmType) algorithmPicker.getValue())
+                    .heuristic((Heuristic) heuristicPicker.getValue())
+                    .timeLimit(timeLimitPicker.getValue())
+                    .build();
+        }
+    }
 }
