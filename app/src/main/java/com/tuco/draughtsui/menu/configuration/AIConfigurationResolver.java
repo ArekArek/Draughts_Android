@@ -9,44 +9,38 @@ public class AIConfigurationResolver {
     public static void resolveAiType(PlayerConfigurationDTO configurationDTO) {
         switch (configurationDTO.getDifficultyType()) {
             case EASY:
-                setEasyConfiguration(configurationDTO);
+                easyConfiguration(configurationDTO);
                 break;
             case MEDIUM:
-                setMediumConfiguration(configurationDTO);
+                mediumConfiguration(configurationDTO);
                 break;
             case HARD:
-                setHardConfiguration(configurationDTO);
+                hardConfiguration(configurationDTO);
                 break;
         }
     }
 
-    private static void setEasyConfiguration(PlayerConfigurationDTO configurationDTO) {
-        configurationDTO.toBuilder()
-                .difficultyType(DifficultyType.EASY)
-                .depth(1)
-                .algorithm(AlgorithmType.MINMAX)
-                .heuristic(Heuristic.SIMPLE)
-                .timeLimit(1)
-                .build();
+    private static void easyConfiguration(PlayerConfigurationDTO configurationDTO) {
+        configurationDTO.setDifficultyType(DifficultyType.EASY);
+        configurationDTO.setDepth(1);
+        configurationDTO.setAlgorithm(AlgorithmType.MINMAX);
+        configurationDTO.setHeuristic(Heuristic.SIMPLE);
+        configurationDTO.setTimeLimit(1);
     }
 
-    private static void setMediumConfiguration(PlayerConfigurationDTO configurationDTO) {
-        configurationDTO.toBuilder()
-                .difficultyType(DifficultyType.MEDIUM)
-                .depth(3)
-                .algorithm(AlgorithmType.ALPHABETA)
-                .heuristic(Heuristic.SIMPLE)
-                .timeLimit(5)
-                .build();
+    private static void mediumConfiguration(PlayerConfigurationDTO configurationDTO) {
+        configurationDTO.setDifficultyType(DifficultyType.MEDIUM);
+        configurationDTO.setDepth(3);
+        configurationDTO.setAlgorithm(AlgorithmType.ALPHABETA);
+        configurationDTO.setHeuristic(Heuristic.SIMPLE);
+        configurationDTO.setTimeLimit(5);
     }
 
-    private static void setHardConfiguration(PlayerConfigurationDTO configurationDTO) {
-        configurationDTO.toBuilder()
-                .difficultyType(DifficultyType.HARD)
-                .depth(4.5f)
-                .algorithm(AlgorithmType.SCOUT)
-                .heuristic(Heuristic.SIMPLE)
-                .timeLimit(10)
-                .build();
+    private static void hardConfiguration(PlayerConfigurationDTO configurationDTO) {
+        configurationDTO.setDifficultyType(DifficultyType.HARD);
+        configurationDTO.setDepth(4.5f);
+        configurationDTO.setAlgorithm(AlgorithmType.SCOUT);
+        configurationDTO.setHeuristic(Heuristic.SIMPLE);
+        configurationDTO.setTimeLimit(10);
     }
 }
