@@ -22,10 +22,10 @@ public class AIConfigurationResolver {
 
     private static void easyConfiguration(PlayerConfigurationDTO configurationDTO) {
         configurationDTO.setDifficultyType(DifficultyType.EASY);
-        configurationDTO.setDepth(1);
+        configurationDTO.setDepth(0.5f);
         configurationDTO.setAlgorithm(AlgorithmType.MINMAX);
         configurationDTO.setHeuristic(Heuristic.SIMPLE);
-        configurationDTO.setTimeLimit(1);
+        configurationDTO.setTimeLimit(0);
     }
 
     private static void mediumConfiguration(PlayerConfigurationDTO configurationDTO) {
@@ -33,14 +33,14 @@ public class AIConfigurationResolver {
         configurationDTO.setDepth(3);
         configurationDTO.setAlgorithm(AlgorithmType.ALPHABETA);
         configurationDTO.setHeuristic(Heuristic.SIMPLE);
-        configurationDTO.setTimeLimit(5);
+        configurationDTO.setTimeLimit(6);
     }
 
     private static void hardConfiguration(PlayerConfigurationDTO configurationDTO) {
         configurationDTO.setDifficultyType(DifficultyType.HARD);
-        configurationDTO.setDepth(4.5f);
+        configurationDTO.setDepth(4.0f);
         configurationDTO.setAlgorithm(AlgorithmType.SCOUT);
         configurationDTO.setHeuristic(Heuristic.SIMPLE);
-        configurationDTO.setTimeLimit(10);
+        configurationDTO.setTimeLimit(0);
     }
 }
