@@ -1,5 +1,6 @@
 package com.tuco.draughtsui.game;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,16 +10,13 @@ import com.tuco.draughts.board.util.StandardBoardCreator;
 import com.tuco.draughts.game.DraughtGameManager;
 import com.tuco.draughts.game.DraughtsState;
 import com.tuco.draughts.game.util.ChangeTurnListener;
-import com.tuco.draughts.movement.maker.AIMovementMaker;
-import com.tuco.draughts.movement.maker.AlgorithmType;
-import com.tuco.draughts.movement.maker.Heuristic;
-import com.tuco.draughts.movement.maker.HumanMovementInformator;
-import com.tuco.draughts.movement.maker.HumanMovementMaker;
 import com.tuco.draughts.movement.maker.MovementMaker;
-import com.tuco.draughts.movement.util.Movement;
 import com.tuco.draughtsui.R;
 import com.tuco.draughtsui.game.board.BoardView;
-import com.tuco.draughtsui.game.movement.AndroidMovementInformator;
+import com.tuco.draughtsui.game.movement.GameTurnChanger;
+import com.tuco.draughtsui.game.movement.MovementMakerCreator;
+import com.tuco.draughtsui.menu.MenuActivity;
+import com.tuco.draughtsui.menu.configuration.PlayerConfigurationDTO;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -26,6 +24,8 @@ public class GameActivity extends AppCompatActivity {
     private DraughtGameManager gameManager;
     private BoardView boardView;
     private Button startButton;
+    private Button backToMenuButton;
+    private Thread gameManagerThread;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,14 +62,22 @@ public class GameActivity extends AppCompatActivity {
         boardView.init(gameManager.getState().getBoard());
 
         startButton = findViewById(R.id.startGameButton);
-        startButton.setOnClickListener(view -> {
-            startButton.setClickable(false);
-            refreshButtonText();
+        startButton.setOnClickListener(view -> startGame());
 
-            Runnable runnable = () -> gameManager.play();
-            Thread thread = new Thread(runnable);
-            thread.start();
-        });
+        backToMenuButton = findViewById(R.id.backToMenuButton);
+        backToMenuButton.setOnClickListener(view -> backToMenu());
+
+    }
+
+    private void startGame() {
+        startButton.setClickable(false);
+        refreshButtonText();
+        startGameThread();
+    }
+
+    private void startGameThread() {
+        gameManagerThread = new Thread(() -> gameManager.play());
+        gameManagerThread.start();
     }
 
     private void refreshButtonText() {
@@ -85,9 +93,21 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void backToMenu() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
+
     public void update() {
         boardView.update(gameManager.getState().getBoard());
 
         refreshButtonText();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        gameManager.stopGame();
+        gameManagerThread.interrupt();
     }
 }

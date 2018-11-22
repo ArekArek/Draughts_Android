@@ -43,7 +43,7 @@ public class HumanPositionLoader implements PositionLoader, View.OnClickListener
 
             synchronized (this) {
                 coordinate = placeView.getCoordinate();
-                notify();
+                notifyAll();
             }
         }
     }
