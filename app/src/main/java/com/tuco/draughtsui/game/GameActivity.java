@@ -40,33 +40,22 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initializeGame() {
-        ChangeTurnListener generalChangeTurnListener = new ChangeTurnListener() {
-            @Override
-            public void afterTurn(Movement movement) {
-                try {
-                    synchronized (boardView) {
-                        runOnUiThread(() -> boardView.showMove(movement));
-                        boardView.wait();
-                        runOnUiThread(() -> updateScreen());
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
         DraughtsState state = new DraughtsState(new StandardBoardCreator());
-
-        HumanMovementInformator humanMovementInformator = new AndroidMovementInformator(boardView);
-        MovementMaker human = new HumanMovementMaker(state, boardView.getHumanPositionLoader(), humanMovementInformator);
-        MovementMaker ai = new AIMovementMaker(state, AlgorithmType.SCOUT, Heuristic.SIMPLE);
+        MovementMaker playerWhite = createPlayer(state, "whiteConfiguration");
+        MovementMaker playerBlack = createPlayer(state, "blackConfiguration");
+        ChangeTurnListener generalChangeTurnListener = new GameTurnChanger(boardView, this);
 
         gameManager = DraughtGameManager.builder()
                 .state(state)
-                .playerWhite(human)
-                .playerBlack(ai)
+                .playerWhite(playerWhite)
+                .playerBlack(playerBlack)
                 .generalChangeTurnListener(generalChangeTurnListener)
                 .build();
+    }
+
+    private MovementMaker createPlayer(DraughtsState state, String extraName) {
+        PlayerConfigurationDTO whitePlayerConfiguration = getIntent().getExtras().getParcelable(extraName);
+        return MovementMakerCreator.create(whitePlayerConfiguration, boardView, state);
     }
 
     private void initializeViews() {
@@ -96,7 +85,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void updateScreen() {
+    public void update() {
         boardView.update(gameManager.getState().getBoard());
 
         refreshButtonText();
