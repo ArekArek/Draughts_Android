@@ -3,6 +3,7 @@ package com.tuco.draughtsui.game.movement;
 import android.view.View;
 
 import com.tuco.draughts.board.util.Coordinate;
+import com.tuco.draughts.movement.maker.MoveStoppedException;
 import com.tuco.draughts.movement.maker.PositionLoader;
 import com.tuco.draughtsui.game.board.PlaceView;
 
@@ -21,15 +22,20 @@ public class HumanPositionLoader implements PositionLoader, View.OnClickListener
         private static final HumanPositionLoader INSTANCE = new HumanPositionLoader();
     }
 
+    private final Object waitLock = new Object();
+
     @Override
-    public Coordinate loadPositionFromUser() {
-        synchronized (this) {
+    public Coordinate loadPositionFromUser() throws MoveStoppedException {
+        coordinate = null;
+        synchronized (waitLock) {
             try {
-                coordinate = new Coordinate();
-                wait();
+                waitLock.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+        if (coordinate == null) {
+            throw new MoveStoppedException();
         }
 
         return coordinate;
@@ -37,14 +43,22 @@ public class HumanPositionLoader implements PositionLoader, View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        if (view instanceof PlaceView) {
-            PlaceView placeView = (PlaceView) view;
-            placeView.showClick();
+        synchronized (waitLock) {
+            if (view instanceof PlaceView) {
+                PlaceView placeView = (PlaceView) view;
+                placeView.showClick();
 
-            synchronized (this) {
                 coordinate = placeView.getCoordinate();
-                notifyAll();
+                waitLock.notifyAll();
             }
+        }
+    }
+
+    @Override
+    public void stop() {
+        synchronized (waitLock) {
+            coordinate = null;
+            waitLock.notifyAll();
         }
     }
 }

@@ -21,11 +21,11 @@ import com.tuco.draughtsui.menu.configuration.PlayerConfigurationDTO;
 
 public class GameActivity extends AppCompatActivity {
 
-    private DraughtGameManager gameManager;
+    private static DraughtGameManager gameManager;
     private BoardView boardView;
     private Button startButton;
     private Button backToMenuButton;
-    private Thread gameManagerThread;
+    private static Thread gameManagerThread;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +76,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startGameThread() {
+        if (gameManagerThread != null) {
+            try {
+                gameManagerThread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         gameManagerThread = new Thread(() -> gameManager.play());
         gameManagerThread.start();
     }
@@ -108,6 +115,5 @@ public class GameActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         gameManager.stopGame();
-        gameManagerThread.interrupt();
     }
 }
