@@ -114,7 +114,9 @@ public class PlaceView extends android.support.v7.widget.AppCompatImageView {
     public void setValues(PlaceView placeView) {
         this.chequer = placeView.chequer;
         this.coordinate = new Coordinate(placeView.coordinate.getColumn(), placeView.coordinate.getRow());
-        this.chequerDrawable = placeView.chequerDrawable.getConstantState().newDrawable().mutate();
+        if (placeView.chequerDrawable != null) {
+            this.chequerDrawable = placeView.chequerDrawable.getConstantState().newDrawable().mutate();
+        }
         this.hidden = placeView.hidden;
 
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
