@@ -3,8 +3,8 @@ package com.tuco.draughtsui.menu.configuration;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.tuco.draughts.game.heuristic.Heuristic;
 import com.tuco.draughts.movement.maker.AlgorithmType;
-import com.tuco.draughts.movement.maker.Heuristic;
 import com.tuco.draughtsui.menu.configuration.enums.DifficultyType;
 
 import lombok.AllArgsConstructor;

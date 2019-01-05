@@ -1,7 +1,7 @@
 package com.tuco.draughtsui.game;
 
 import com.tuco.draughts.board.Board;
-import com.tuco.draughts.board.util.StandardBoardCreator;
+import com.tuco.draughts.board.util.Draughts64BoardCreator;
 import com.tuco.draughts.game.DraughtGameManager;
 import com.tuco.draughts.game.DraughtsState;
 import com.tuco.draughts.game.util.ChangeTurnListener;
@@ -24,7 +24,7 @@ public class GameActivityLogic {
     }
 
     public void initializeGame() {
-        DraughtsState state = new DraughtsState(new StandardBoardCreator());
+        DraughtsState state = new DraughtsState(new Draughts64BoardCreator());
 
         MovementMaker playerWhite = createPlayer(state, "whiteConfiguration");
         MovementMaker playerBlack = createPlayer(state, "blackConfiguration");

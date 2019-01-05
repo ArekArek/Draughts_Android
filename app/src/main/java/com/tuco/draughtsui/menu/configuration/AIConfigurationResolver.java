@@ -1,7 +1,7 @@
 package com.tuco.draughtsui.menu.configuration;
 
+import com.tuco.draughts.game.heuristic.Heuristic;
 import com.tuco.draughts.movement.maker.AlgorithmType;
-import com.tuco.draughts.movement.maker.Heuristic;
 import com.tuco.draughtsui.menu.configuration.enums.DifficultyType;
 
 public class AIConfigurationResolver {
