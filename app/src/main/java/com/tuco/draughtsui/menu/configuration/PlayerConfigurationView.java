@@ -2,6 +2,8 @@ package com.tuco.draughtsui.menu.configuration;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -48,11 +50,16 @@ public class PlayerConfigurationView extends LinearLayout {
                 R.styleable.PlayerConfigurationView,
                 0, 0);
 
+        GradientDrawable background = new GradientDrawable();
+        background.setStroke(16, context.getColor(R.color.enabledBackground));
+        background.setCornerRadius(16);
         try {
             if (a.getInteger(R.styleable.PlayerConfigurationView_type, 0) == 0) {
-                setBackgroundColor(context.getColor(R.color.white));
+                background.setColor(context.getColor(R.color.white));
+                setBackground(background);
             } else {
-                setBackgroundColor(context.getColor(R.color.black));
+                background.setColor(context.getColor(R.color.black));
+                setBackground(background);
             }
         } finally {
             a.recycle();

@@ -9,7 +9,9 @@
     <com.tuco.draughtsui.menu.configuration.views.EnumPicker
         android:id="@+id/playerTypePicker"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:layout_marginTop="8dp"/>
 
     <LinearLayout
         android:id="@+id/aiMenu"
@@ -22,7 +24,9 @@
         <com.tuco.draughtsui.menu.configuration.views.EnumPicker
             android:id="@+id/difficultyPicker"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_selector"
+            android:layout_marginTop="4dp"/>
 
         <TableLayout
             android:id="@+id/aiConfiguration"
@@ -36,7 +40,8 @@
                 android:layout_height="2dp"
                 android:background="@color/colorPrimaryDark" />
 
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -56,7 +61,8 @@
                     app:step="0.5" />
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -68,10 +74,12 @@
                 <com.tuco.draughtsui.menu.configuration.views.EnumPicker
                     android:id="@+id/algorithmPicker"
                     android:layout_width="wrap_content"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    android:background="@drawable/button_selector" />
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -83,10 +91,12 @@
                 <com.tuco.draughtsui.menu.configuration.views.EnumPicker
                     android:id="@+id/heuristicPicker"
                     android:layout_width="wrap_content"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    android:background="@drawable/button_selector" />
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -37,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@drawable/button_selector"
             android:text="start" />
 
     </LinearLayout>
@@ -47,5 +48,8 @@
         android:layout_height="wrap_content"
         android:text="Back to menu"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_selector"
+        android:padding="8dp"
+        android:layout_margin="8dp"/>
 </RelativeLayout>
