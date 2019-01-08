@@ -71,6 +71,10 @@ public class BoardView extends TableLayout {
         fillTable(board);
 
         invalidate();
+
+        synchronized (this) {
+            this.notify();
+        }
     }
 
     public void highlightPossible(List<Coordinate> possiblePositions) {

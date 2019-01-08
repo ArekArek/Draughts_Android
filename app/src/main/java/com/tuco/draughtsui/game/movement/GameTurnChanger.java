@@ -20,6 +20,7 @@ public class GameTurnChanger implements ChangeTurnListener {
                 gameActivity.runOnUiThread(() -> boardView.showMove(movement));
                 boardView.wait();
                 gameActivity.runOnUiThread(gameActivity::update);
+                boardView.wait();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
