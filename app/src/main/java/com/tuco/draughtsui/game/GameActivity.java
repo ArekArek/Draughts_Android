@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.tuco.draughts.game.util.Player;
 import com.tuco.draughtsui.R;
 import com.tuco.draughtsui.game.board.BoardView;
 import com.tuco.draughtsui.menu.MenuActivity;
@@ -16,6 +18,7 @@ public class GameActivity extends AppCompatActivity {
 
     private BoardView boardView;
     private Button startButton;
+    private TextView winnerLabel;
     private Button backToMenuButton;
     private GameActivityLogic gameActivityLogic;
 
@@ -36,6 +39,8 @@ public class GameActivity extends AppCompatActivity {
     private void initializeViews() {
         boardView.init(gameActivityLogic.getBoard());
 
+        winnerLabel = findViewById(R.id.winnerLabel);
+
         startButton = findViewById(R.id.startGameButton);
         startButton.setOnClickListener(view -> startGame());
 
@@ -47,6 +52,28 @@ public class GameActivity extends AppCompatActivity {
         startButton.setClickable(false);
         startButton.setVisibility(View.GONE);
         gameActivityLogic.startGameThread();
+    }
+
+    public void finishGame(Player winner) {
+        winnerLabel.setTextColor(getColor(R.color.colorPrimaryDark));
+        String winnerLabelText = "nobody won";
+        if (winner != null) {
+            switch (winner) {
+                case BLACK:
+                    winnerLabel.setTextColor(getColor(R.color.black));
+                    winnerLabelText = "BLACK won";
+                    break;
+                case WHITE:
+                    winnerLabel.setTextColor(getColor(R.color.white));
+                    winnerLabelText = "WHITE won";
+                    break;
+                case BOTH:
+                    winnerLabelText = "DRAW";
+                    break;
+            }
+        }
+        winnerLabel.setText(winnerLabelText);
+        winnerLabel.setVisibility(View.VISIBLE);
     }
 
     private void backToMenu() {

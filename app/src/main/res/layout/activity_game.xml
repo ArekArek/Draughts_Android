@@ -40,6 +40,15 @@
             android:background="@drawable/button_selector"
             android:text="start" />
 
+        <TextView
+            android:id="@+id/winnerLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="TextView"
+            android:textSize="36sp"
+            android:visibility="gone" />
+
     </LinearLayout>
 
     <Button

@@ -52,12 +52,17 @@ public class GameActivityLogic {
                 e.printStackTrace();
             }
         }
-        gameManagerThread = new Thread(() -> gameManager.play());
+        gameManagerThread = new Thread(this::playGame);
         gameManagerThread.start();
     }
 
     public void stopGameThread() {
         gameManager.stopGame();
+    }
+
+    private void playGame() {
+        gameManager.play();
+        gameActivity.runOnUiThread(() -> gameActivity.finishGame(gameManager.getWinner()));
     }
 
     public Board getBoard() {
