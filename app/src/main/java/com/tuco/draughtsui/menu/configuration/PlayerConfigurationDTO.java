@@ -25,6 +25,7 @@ public class PlayerConfigurationDTO implements Parcelable {
     private AlgorithmType algorithm;
     private Heuristic heuristic;
     private float timeLimit;
+    private boolean quiescence;
 
     protected PlayerConfigurationDTO(Parcel in) {
         this.human = (Boolean) in.readValue(null);
@@ -34,6 +35,7 @@ public class PlayerConfigurationDTO implements Parcelable {
             this.algorithm = (AlgorithmType) in.readSerializable();
             this.heuristic = (Heuristic) in.readSerializable();
             this.timeLimit = in.readFloat();
+            this.quiescence = in.readByte() != 0;
 
             AIConfigurationResolver.resolveAiType(this);
         }
@@ -65,6 +67,7 @@ public class PlayerConfigurationDTO implements Parcelable {
             dest.writeSerializable(algorithm);
             dest.writeSerializable(heuristic);
             dest.writeFloat(timeLimit);
+            dest.writeByte((byte) (quiescence ? 1: 0));
         }
     }
 }

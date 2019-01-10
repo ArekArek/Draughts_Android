@@ -29,6 +29,7 @@ public class MovementMakerCreator {
     private static MovementMaker createAI(PlayerConfigurationDTO playerConfiguration, DraughtsState state) {
         AIMovementMaker ai = new AIMovementMaker(state, playerConfiguration.getAlgorithm(), playerConfiguration.getHeuristic());
         ai.setDepthLimit(playerConfiguration.getDepth());
+        ai.setQuiescenceOn(playerConfiguration.isQuiescence());
         if (playerConfiguration.getTimeLimit() > 0) {
             ai.setTimeLimit((long) (playerConfiguration.getTimeLimit() * 1000));
         }

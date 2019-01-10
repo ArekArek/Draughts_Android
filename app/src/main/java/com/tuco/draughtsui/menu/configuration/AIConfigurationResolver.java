@@ -26,21 +26,24 @@ public class AIConfigurationResolver {
         configurationDTO.setAlgorithm(AlgorithmType.MINMAX);
         configurationDTO.setHeuristic(Heuristic.SIMPLE);
         configurationDTO.setTimeLimit(0);
+        configurationDTO.setQuiescence(false);
     }
 
     private static void mediumConfiguration(PlayerConfigurationDTO configurationDTO) {
         configurationDTO.setDifficultyType(DifficultyType.MEDIUM);
-        configurationDTO.setDepth(3);
+        configurationDTO.setDepth(2);
         configurationDTO.setAlgorithm(AlgorithmType.ALPHABETA);
         configurationDTO.setHeuristic(Heuristic.SIMPLE);
         configurationDTO.setTimeLimit(6);
+        configurationDTO.setQuiescence(true);
     }
 
     private static void hardConfiguration(PlayerConfigurationDTO configurationDTO) {
         configurationDTO.setDifficultyType(DifficultyType.HARD);
-        configurationDTO.setDepth(4.0f);
+        configurationDTO.setDepth(3);
         configurationDTO.setAlgorithm(AlgorithmType.SCOUT);
         configurationDTO.setHeuristic(Heuristic.SIMPLE);
         configurationDTO.setTimeLimit(0);
+        configurationDTO.setQuiescence(true);
     }
 }
