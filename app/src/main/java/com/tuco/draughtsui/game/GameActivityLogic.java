@@ -5,6 +5,8 @@ import com.tuco.draughts.board.util.Draughts64BoardCreator;
 import com.tuco.draughts.game.DraughtGameManager;
 import com.tuco.draughts.game.DraughtsState;
 import com.tuco.draughts.game.util.ChangeTurnListener;
+import com.tuco.draughts.movement.maker.AIMovementMaker;
+import com.tuco.draughts.movement.maker.HumanMovementMaker;
 import com.tuco.draughts.movement.maker.MovementMaker;
 import com.tuco.draughtsui.game.board.BoardView;
 import com.tuco.draughtsui.game.movement.GameTurnChanger;
@@ -37,6 +39,16 @@ public class GameActivityLogic {
                 .playerBlack(playerBlack)
                 .generalChangeTurnListener(generalChangeTurnListener)
                 .build();
+
+        rotateBoard(playerWhite, playerBlack);
+    }
+
+    private void rotateBoard(MovementMaker playerWhite, MovementMaker playerBlack) {
+        if (playerWhite instanceof HumanMovementMaker && playerBlack instanceof AIMovementMaker) {
+            boardView.setRotation(-90);
+        } else if (playerWhite instanceof AIMovementMaker && playerBlack instanceof HumanMovementMaker) {
+            boardView.setRotation(90);
+        }
     }
 
     private MovementMaker createPlayer(DraughtsState state, String extraName) {

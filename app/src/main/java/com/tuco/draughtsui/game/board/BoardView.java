@@ -118,6 +118,7 @@ public class BoardView extends TableLayout {
                     .setCoordinate(placeCoordinates)
                     .build();
 
+            placeView.setRotation(getRotation()*(-1));
             tableRow.addView(placeView);
             rowCount++;
         }
