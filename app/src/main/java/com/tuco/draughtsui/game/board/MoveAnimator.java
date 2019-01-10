@@ -78,6 +78,7 @@ public class MoveAnimator {
     private AnimatorSet createSubAnimation(PlaceView placeA, PlaceView placeB, PlaceView placeHit) {
         AnimatorSet animatorSet = createAnimatorSet(placeA, placeB, placeHit);
         animatorSet.setInterpolator(new AccelerateInterpolator());
+        animatorSet.setDuration(500);
         animatorSet.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -116,14 +117,12 @@ public class MoveAnimator {
     @NonNull
     private Path generateMovePath(PlaceView placeA, PlaceView placeB) {
         int[] startPoint = getScreenLocation(placeA);
-        int[] firstPoint = getScreenLocation(placeA);
         int[] secondPoint = getJumpedLocation(placeB);
         int[] endPoint = getScreenLocation(placeB);
 
         Path path = new Path();
         path.moveTo(startPoint[0], startPoint[1]);
-        path.cubicTo(firstPoint[0], firstPoint[1], secondPoint[0], secondPoint[1], endPoint[0], endPoint[1]);
-
+        path.cubicTo(startPoint[0], startPoint[1], secondPoint[0], secondPoint[1], endPoint[0], endPoint[1]);
         return path;
     }
 
