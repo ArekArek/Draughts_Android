@@ -12,6 +12,7 @@ import android.widget.TableLayout;
 import com.tuco.draughts.game.heuristic.Heuristic;
 import com.tuco.draughts.movement.maker.AlgorithmType;
 import com.tuco.draughtsui.R;
+import com.tuco.draughtsui.menu.configuration.enums.BoolType;
 import com.tuco.draughtsui.menu.configuration.enums.DifficultyType;
 import com.tuco.draughtsui.menu.configuration.enums.PlayerType;
 import com.tuco.draughtsui.menu.configuration.views.EnumPicker;
@@ -29,6 +30,7 @@ public class PlayerConfigurationView extends LinearLayout {
     private EnumPicker algorithmPicker;
     private EnumPicker heuristicPicker;
     private NumberPicker timeLimitPicker;
+    private EnumPicker quiescencePicker;
 
     public PlayerConfigurationView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -104,6 +106,9 @@ public class PlayerConfigurationView extends LinearLayout {
         heuristicPicker.init(getContext(), Heuristic.SIMPLE);
 
         timeLimitPicker = findViewById(R.id.timeLimitPicker);
+
+        quiescencePicker = findViewById(R.id.quiescencemPicker);
+        quiescencePicker.init(getContext(), BoolType.FALSE);
     }
 
     public PlayerConfigurationDTO getData() {
@@ -119,6 +124,7 @@ public class PlayerConfigurationView extends LinearLayout {
                     .algorithm((AlgorithmType) algorithmPicker.getValue())
                     .heuristic((Heuristic) heuristicPicker.getValue())
                     .timeLimit(timeLimitPicker.getValue())
+                    .quiescence((BoolType) quiescencePicker.getValue())
                     .build();
         }
     }

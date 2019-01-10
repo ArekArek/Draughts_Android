@@ -9,6 +9,7 @@ import com.tuco.draughts.movement.maker.HumanMovementMaker;
 import com.tuco.draughts.movement.maker.MovementMaker;
 import com.tuco.draughtsui.game.board.BoardView;
 import com.tuco.draughtsui.menu.configuration.PlayerConfigurationDTO;
+import com.tuco.draughtsui.menu.configuration.enums.BoolType;
 
 public class MovementMakerCreator {
     public static MovementMaker create(PlayerConfigurationDTO playerConfiguration, BoardView boardView, DraughtsState state) {
@@ -29,7 +30,7 @@ public class MovementMakerCreator {
     private static MovementMaker createAI(PlayerConfigurationDTO playerConfiguration, DraughtsState state) {
         AIMovementMaker ai = new AIMovementMaker(state, playerConfiguration.getAlgorithm(), playerConfiguration.getHeuristic());
         ai.setDepthLimit(playerConfiguration.getDepth());
-        ai.setQuiescenceOn(playerConfiguration.isQuiescence());
+        ai.setQuiescenceOn(playerConfiguration.getQuiescence() == BoolType.TRUE);
         if (playerConfiguration.getTimeLimit() > 0) {
             ai.setTimeLimit((long) (playerConfiguration.getTimeLimit() * 1000));
         }

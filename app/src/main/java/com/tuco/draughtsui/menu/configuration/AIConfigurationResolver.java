@@ -2,6 +2,7 @@ package com.tuco.draughtsui.menu.configuration;
 
 import com.tuco.draughts.game.heuristic.Heuristic;
 import com.tuco.draughts.movement.maker.AlgorithmType;
+import com.tuco.draughtsui.menu.configuration.enums.BoolType;
 import com.tuco.draughtsui.menu.configuration.enums.DifficultyType;
 
 public class AIConfigurationResolver {
@@ -26,7 +27,7 @@ public class AIConfigurationResolver {
         configurationDTO.setAlgorithm(AlgorithmType.MINMAX);
         configurationDTO.setHeuristic(Heuristic.SIMPLE);
         configurationDTO.setTimeLimit(0);
-        configurationDTO.setQuiescence(false);
+        configurationDTO.setQuiescence(BoolType.FALSE);
     }
 
     private static void mediumConfiguration(PlayerConfigurationDTO configurationDTO) {
@@ -35,7 +36,8 @@ public class AIConfigurationResolver {
         configurationDTO.setAlgorithm(AlgorithmType.ALPHABETA);
         configurationDTO.setHeuristic(Heuristic.SIMPLE);
         configurationDTO.setTimeLimit(6);
-        configurationDTO.setQuiescence(true);
+
+        configurationDTO.setQuiescence(BoolType.TRUE);
     }
 
     private static void hardConfiguration(PlayerConfigurationDTO configurationDTO) {
@@ -44,6 +46,6 @@ public class AIConfigurationResolver {
         configurationDTO.setAlgorithm(AlgorithmType.SCOUT);
         configurationDTO.setHeuristic(Heuristic.SIMPLE);
         configurationDTO.setTimeLimit(0);
-        configurationDTO.setQuiescence(true);
+        configurationDTO.setQuiescence(BoolType.TRUE);
     }
 }

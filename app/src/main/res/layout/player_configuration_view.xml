@@ -55,7 +55,7 @@
                     android:id="@+id/depthPicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:defaultValue="3.5"
+                    app:defaultValue="2.5"
                     app:floatingPoint="true"
                     app:maxValue="7"
                     app:minValue="0.5"
@@ -113,11 +113,29 @@
                     android:id="@+id/timeLimitPicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:defaultValue="1"
+                    app:defaultValue="5"
                     app:floatingPoint="true"
                     app:maxValue="60"
                     app:minValue="0"
                     app:step="1" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="4dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:text="algorithm" />
+
+                <com.tuco.draughtsui.menu.configuration.views.EnumPicker
+                    android:id="@+id/quiescencemPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:background="@drawable/button_selector" />
             </TableRow>
         </TableLayout>
 

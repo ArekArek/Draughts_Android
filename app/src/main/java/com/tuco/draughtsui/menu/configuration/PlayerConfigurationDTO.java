@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.tuco.draughts.game.heuristic.Heuristic;
 import com.tuco.draughts.movement.maker.AlgorithmType;
+import com.tuco.draughtsui.menu.configuration.enums.BoolType;
 import com.tuco.draughtsui.menu.configuration.enums.DifficultyType;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class PlayerConfigurationDTO implements Parcelable {
     private AlgorithmType algorithm;
     private Heuristic heuristic;
     private float timeLimit;
-    private boolean quiescence;
+    private BoolType quiescence;
 
     protected PlayerConfigurationDTO(Parcel in) {
         this.human = (Boolean) in.readValue(null);
@@ -35,7 +36,7 @@ public class PlayerConfigurationDTO implements Parcelable {
             this.algorithm = (AlgorithmType) in.readSerializable();
             this.heuristic = (Heuristic) in.readSerializable();
             this.timeLimit = in.readFloat();
-            this.quiescence = in.readByte() != 0;
+            this.quiescence = (BoolType) in.readSerializable();
 
             AIConfigurationResolver.resolveAiType(this);
         }
@@ -67,7 +68,7 @@ public class PlayerConfigurationDTO implements Parcelable {
             dest.writeSerializable(algorithm);
             dest.writeSerializable(heuristic);
             dest.writeFloat(timeLimit);
-            dest.writeByte((byte) (quiescence ? 1: 0));
+            dest.writeSerializable(quiescence);
         }
     }
 }
