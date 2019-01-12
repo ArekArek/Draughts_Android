@@ -12,12 +12,14 @@
         <activity
             android:name=".game.GameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme">
         </activity>
         <activity
             android:name=".menu.MenuActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme">
 
