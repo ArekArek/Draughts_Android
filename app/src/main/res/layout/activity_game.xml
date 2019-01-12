@@ -8,8 +8,9 @@
     tools:context=".game.GameActivity">
 
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mainGameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:configChanges="orientation"
         android:orientation="vertical">
 
@@ -50,6 +51,23 @@
             android:visibility="gone" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/logWindow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/backToMenuButton"
+        android:layout_below="@+id/mainGameLayout"
+        android:layout_margin="10dp"
+        android:background="@drawable/log_window"
+        android:gravity="bottom|start"
+        android:inputType="textMultiLine"
+        android:overScrollMode="always"
+        android:padding="10dp"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        android:textColor="@color/enabledBackground" />
 
     <Button
         android:id="@+id/backToMenuButton"

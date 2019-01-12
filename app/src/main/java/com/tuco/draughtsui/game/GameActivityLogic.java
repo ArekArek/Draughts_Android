@@ -8,7 +8,6 @@ import com.tuco.draughts.game.util.ChangeTurnListener;
 import com.tuco.draughts.movement.maker.AIMovementMaker;
 import com.tuco.draughts.movement.maker.HumanMovementMaker;
 import com.tuco.draughts.movement.maker.MovementMaker;
-import com.tuco.draughtsui.game.board.BoardView;
 import com.tuco.draughtsui.game.movement.GameTurnChanger;
 import com.tuco.draughtsui.game.movement.MovementMakerCreator;
 import com.tuco.draughtsui.menu.configuration.PlayerConfigurationDTO;
@@ -16,13 +15,11 @@ import com.tuco.draughtsui.menu.configuration.PlayerConfigurationDTO;
 public class GameActivityLogic {
 
     private GameActivity gameActivity;
-    private BoardView boardView;
     private DraughtGameManager gameManager;
     private Thread gameManagerThread;
 
-    public GameActivityLogic(GameActivity gameActivity, BoardView boardView) {
+    public GameActivityLogic(GameActivity gameActivity) {
         this.gameActivity = gameActivity;
-        this.boardView = boardView;
     }
 
     public void initializeGame() {
@@ -31,7 +28,7 @@ public class GameActivityLogic {
         MovementMaker playerWhite = createPlayer(state, "whiteConfiguration");
         MovementMaker playerBlack = createPlayer(state, "blackConfiguration");
 
-        ChangeTurnListener generalChangeTurnListener = new GameTurnChanger(boardView, gameActivity);
+        ChangeTurnListener generalChangeTurnListener = new GameTurnChanger(gameActivity);
 
         gameManager = DraughtGameManager.builder()
                 .state(state)
@@ -45,15 +42,15 @@ public class GameActivityLogic {
 
     private void rotateBoard(MovementMaker playerWhite, MovementMaker playerBlack) {
         if (playerWhite instanceof HumanMovementMaker && playerBlack instanceof AIMovementMaker) {
-            boardView.setRotation(-90);
+            gameActivity.getBoardView().setRotation(-90);
         } else if (playerWhite instanceof AIMovementMaker && playerBlack instanceof HumanMovementMaker) {
-            boardView.setRotation(90);
+            gameActivity.getBoardView().setRotation(90);
         }
     }
 
     private MovementMaker createPlayer(DraughtsState state, String extraName) {
         PlayerConfigurationDTO whitePlayerConfiguration = gameActivity.getIntent().getExtras().getParcelable(extraName);
-        return MovementMakerCreator.create(whitePlayerConfiguration, boardView, state);
+        return MovementMakerCreator.create(whitePlayerConfiguration, gameActivity.getBoardView(), state);
     }
 
     public void startGameThread() {
