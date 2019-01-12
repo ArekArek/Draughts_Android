@@ -23,7 +23,7 @@ public class GameTurnChanger implements ChangeTurnListener {
         int turnCount = gameManager.getTurnCounter();
         stringBuilder.append("\n\n--------Turn: ").append(turnCount).append("--------");
         Player player = gameManager.getState().getPlayer();
-        stringBuilder.append("\n   Player: ").append(player.getValue()).append("   ");
+        stringBuilder.append("\n   Player ").append(player.getValue()).append("   ");
         gameActivity.addLog(stringBuilder.toString());
     }
 
