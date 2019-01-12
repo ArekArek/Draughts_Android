@@ -48,6 +48,10 @@ public class GameActivity extends AppCompatActivity {
 
         logWindow = findViewById(R.id.logWindow);
         logWindow.setMovementMethod(new ScrollingMovementMethod());
+        boolean x = getIntent().getExtras().getBoolean("logs");
+        if (!x) {
+            logWindow.setVisibility(View.GONE);
+        }
 
         startButton = findViewById(R.id.startGameButton);
         startButton.setOnClickListener(view -> startGame());
